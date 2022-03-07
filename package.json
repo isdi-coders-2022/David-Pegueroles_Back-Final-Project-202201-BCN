@@ -4,8 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "",
+    "test": "jest --passWithNoTests",
+    "watchall": "jest --watchAll",
+    "coverage": "jest --coverage",
     "prepare": "husky install"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js",
+      "!src/index.js",
+      "!src/server/serverUp.js",
+      "!src/database/index.js"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -17,6 +28,8 @@
     "husky": "^7.0.0"
   },
   "dependencies": {
-    "eslint-config-prettier": "^8.5.0"
+    "@types/jest": "^27.4.1",
+    "eslint-config-prettier": "^8.5.0",
+    "jest": "^27.5.1"
   }
 }
