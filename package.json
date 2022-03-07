@@ -7,14 +7,16 @@
     "test": "jest --passWithNoTests",
     "watchall": "jest --watchAll",
     "coverage": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "node src",
+    "ramon": "nodemon src -q"
   },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.js",
       "!src/**/*.test.js",
       "!src/index.js",
-      "!src/server/serverUp.js",
+      "!src/server/deployServer.js",
       "!src/database/index.js"
     ]
   },
@@ -29,7 +31,11 @@
   },
   "dependencies": {
     "@types/jest": "^27.4.1",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.3",
+    "dotenv": "^16.0.0",
     "eslint-config-prettier": "^8.5.0",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15"
   }
 }
