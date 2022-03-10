@@ -16,6 +16,7 @@
       "src/**/*.js",
       "!src/**/*.test.js",
       "!src/index.js",
+      "!src/server/index.js",
       "!src/server/deployServer.js",
       "!src/database/index.js"
     ]
