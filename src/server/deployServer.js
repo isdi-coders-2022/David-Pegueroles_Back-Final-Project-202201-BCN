@@ -4,7 +4,9 @@ const chalk = require("chalk");
 const deployServer = (port, app) =>
   new Promise((resolve, reject) => {
     const server = app.listen(port, () => {
-      debug(chalk.green(`Server is up at http://localhost:${port}`));
+      debug(
+        chalk.green.bold.italic(`Server is up at http://localhost:${port}`)
+      );
       resolve();
     });
 
