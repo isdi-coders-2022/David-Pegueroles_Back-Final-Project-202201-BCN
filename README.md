@@ -15,7 +15,7 @@
 - /calendar/month/
 
   - Receives a request with a GET method.
-  - It returns a list of all the meetings planned for that month
+  - Returns a response with a list of all the meetings planned for the current month.
 
 - /calendar/:idDay
 
