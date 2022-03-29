@@ -1,5 +1,16 @@
 # List of endpoints and what they do
 
+_This file is being updated as the project progresses, which is still in further development_
+
+## Current functional endpoints
+
+- /calendar
+
+  - Receives a request with a GET method.
+  - Returns a response with a list of all the meetings planned for the current month.
+
+## Planned for future updates
+
 - /user/login
 
   - Receives a request with a POST method.
@@ -12,12 +23,11 @@
 
   - Receives a request with a GET method.
 
-- /calendar/month/
+- /calendar/:idDay
 
   - Receives a request with a GET method.
-  - Returns a response with a list of all the meetings planned for the current month.
 
-- /calendar/:idDay
+- /calendar/:idAppointment
 
   - Receives a request with a GET method.
 
@@ -32,9 +42,3 @@
 - /appointments/edit
 
   - Receives a request with a PUT method.
-
-- /appointments/:idAppointment
-
-  - Receives a request with a GET method.
-
-* This file will be updated
