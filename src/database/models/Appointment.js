@@ -12,7 +12,7 @@ const AppointmentSchema = new Schema({
     type: Date,
     required: true,
   },
-  cateogry: {
+  category: {
     type: String,
     required: true,
   },
