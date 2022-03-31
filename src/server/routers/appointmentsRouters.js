@@ -1,8 +1,12 @@
 const express = require("express");
-const { getAppointments } = require("../controllers/appointmentsControllers");
+const {
+  getDailyAppointments,
+  getAppointmentInfo,
+} = require("../controllers/appointmentsControllers");
 
 const router = express.Router();
 
-router.get("/:date", getAppointments);
+router.get("/:date", getDailyAppointments);
+router.get("/appointment/:idAppointment", getAppointmentInfo);
 
 module.exports = router;
