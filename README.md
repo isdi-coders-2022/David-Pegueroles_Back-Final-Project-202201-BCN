@@ -4,10 +4,10 @@ _This file is being updated as the project progresses, which is still in further
 
 ## Current functional endpoints
 
-- /calendar
+- /calendar/:date
 
   - Receives a request with a GET method.
-  - Returns a response with a list of all the meetings planned for the current month.
+  - Returns a response with a list of all the meetings planned for the current date.
 
 ## Planned for future updates
 
