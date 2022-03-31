@@ -3,6 +3,6 @@ const { getAppointments } = require("../controllers/appointmentsControllers");
 
 const router = express.Router();
 
-router.get("/", getAppointments);
+router.get("/:date", getAppointments);
 
 module.exports = router;
