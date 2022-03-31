@@ -92,3 +92,52 @@ describe("Given an endpoint /calendar/:date", () => {
     });
   });
 });
+
+describe("Given an endpoint /calendar/appointment/:idAppointment", () => {
+  describe("When it receives a request with a GET method", () => {
+    test("Then it should respond with status 200 and an appointment", async () => {
+      const {
+        body: {
+          appointments: {
+            0: { id },
+          },
+        },
+      } = await request(app).get("/calendar/2022-03-29").expect(200);
+
+      const appointmentProperties = [
+        "name",
+        "description",
+        "date",
+        "hour",
+        "category",
+        "location",
+        "id",
+      ];
+
+      const expectedResponse = {
+        appointment: [
+          {
+            name: "Do something",
+            description: "This should do",
+            date: "2022-03-29",
+            hour: "10:00",
+            category: "Work",
+            location: "C/ Diputació 37, Barcelona",
+          },
+        ],
+      };
+
+      const { body } = await request(app)
+        .get(`/calendar/appointment/${id}`)
+        .expect(200);
+
+      appointmentProperties.forEach((property) => {
+        expect(body.appointment).toHaveProperty(property);
+
+        expect(body.appointment.property).toBe(
+          expectedResponse.appointment.property
+        );
+      });
+    });
+  });
+});
