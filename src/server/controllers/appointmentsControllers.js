@@ -34,8 +34,25 @@ const deleteAppointment = async (req, res, next) => {
   }
 };
 
+const createAppointment = async (req, res, next) => {
+  try {
+    const newAppointment = await Appointment.create(req.body);
+    if (newAppointment) {
+      res.status(201).json({ newAppointment });
+    } else {
+      const error = new Error("Could not create the appointment");
+      error.code = 400;
+      next(error);
+    }
+  } catch (error) {
+    error.code = 500;
+    next(error);
+  }
+};
+
 module.exports = {
   getDailyAppointments,
   getAppointmentInfo,
   deleteAppointment,
+  createAppointment,
 };
