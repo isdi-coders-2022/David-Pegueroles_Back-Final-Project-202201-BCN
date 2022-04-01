@@ -140,4 +140,51 @@ describe("Given an endpoint /calendar/appointment/:idAppointment", () => {
       });
     });
   });
+
+  describe("When it receives a request with a DELETE method", () => {
+    test("Then it should respond with status 200 and the deleted appointment", async () => {
+      const {
+        body: {
+          appointments: {
+            0: { id },
+          },
+        },
+      } = await request(app).get("/calendar/2022-03-29").expect(200);
+
+      const appointmentProperties = [
+        "name",
+        "description",
+        "date",
+        "hour",
+        "category",
+        "location",
+        "id",
+      ];
+
+      const expectedResponse = {
+        deletedAppointment: [
+          {
+            name: "Do something",
+            description: "This should do",
+            date: "2022-03-29",
+            hour: "10:00",
+            category: "Work",
+            location: "C/ Diputació 37, Barcelona",
+          },
+        ],
+      };
+
+      const {
+        body: { deletedAppointment },
+      } = await request(app).delete(`/calendar/appointment/${id}`).expect(200);
+
+      appointmentProperties.forEach((property) => {
+        expect(deletedAppointment).toHaveProperty(property);
+
+        expect(deletedAppointment.property).toBe(
+          expectedResponse.deletedAppointment.property
+        );
+      });
+    });
+  });
 });
