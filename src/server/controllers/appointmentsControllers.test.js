@@ -2,6 +2,7 @@ const Appointment = require("../../database/models/Appointment");
 const {
   getDailyAppointments,
   getAppointmentInfo,
+  deleteAppointment,
 } = require("./appointmentsControllers");
 
 jest.mock("../../database/models/Appointment");
@@ -127,6 +128,62 @@ describe("Given a getAppointmentInfo controller", () => {
       Appointment.findById = jest.fn().mockRejectedValueOnce(error);
 
       await getAppointmentInfo(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+});
+
+describe("Given a deleteAppointment controller", () => {
+  describe("When it receives a response", () => {
+    test("Then it should call res status and json methods with a 200 and the deleted appointment respectively", async () => {
+      const req = {
+        params: {
+          idAppointment: "1",
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      const status = 200;
+      const deletedAppointment = {
+        name: "Do something else",
+        description: "This is another thing to do",
+        date: "2022-03-31",
+        category: "Work",
+        location: "C/ Diputació 37, Barcelona",
+        hour: "12:00",
+        id: "1",
+      };
+      Appointment.findByIdAndDelete = jest
+        .fn()
+        .mockReturnValue(deletedAppointment);
+
+      await deleteAppointment(req, res);
+
+      expect(Appointment.findByIdAndDelete).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(status);
+      expect(res.json).toHaveBeenCalledWith({ deletedAppointment });
+    });
+  });
+
+  describe("When an error occurs", () => {
+    test("Then it should call next with an error with status 400", async () => {
+      const req = {
+        params: {
+          idAppointment: "1",
+        },
+      };
+      const res = null;
+      const next = jest.fn();
+      const error = {
+        status: 400,
+      };
+
+      Appointment.findByIdAndDelete = jest.fn().mockRejectedValueOnce(error);
+
+      await deleteAppointment(req, res, next);
 
       expect(next).toHaveBeenCalledWith(error);
     });
