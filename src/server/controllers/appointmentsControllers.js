@@ -22,4 +22,20 @@ const getAppointmentInfo = async (req, res, next) => {
   }
 };
 
-module.exports = { getDailyAppointments, getAppointmentInfo };
+const deleteAppointment = async (req, res, next) => {
+  try {
+    const deletedAppointment = await Appointment.findByIdAndDelete({
+      _id: req.params.idAppointment,
+    });
+    res.status(200).json({ deletedAppointment });
+  } catch (error) {
+    error.status = 400;
+    next(error);
+  }
+};
+
+module.exports = {
+  getDailyAppointments,
+  getAppointmentInfo,
+  deleteAppointment,
+};
